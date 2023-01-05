@@ -40,3 +40,11 @@ RUN cd ffmpeg && \
 It is not recommended to take precompiled stuff from random guys over there. For testing and save time it is ok, but when going to production
 or doing something important take the time to build it buy yourself. All the work are done by your computer and docker, you only have to run a command and
 take a coffee. Don't be lazy when you don't have to ;)
+
+
+#  Build
+
+The container is built for arm64, armv7 and amd64
+```
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t maxpowel/ffmpeg-dependencies --push .
+```
