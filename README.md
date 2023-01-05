@@ -16,7 +16,7 @@ All dependencies are installed into the directory `/dependencies` so just copy t
 FROM ubuntu:20.04
 FROM maxpowel/ffmpeg-dependencies as ffmpegdeps
 
-ADD --from=ffmpegdeps /dependencies /
+COPY --from=ffmpegdeps /dependencies /
 
 ```
 
