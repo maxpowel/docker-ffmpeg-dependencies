@@ -10,13 +10,29 @@ I use my built ffmpeg version in my amd64 computer and raspberries (armv7 and aa
 
 # Using it
 
-All dependencies are installed into the directory `/dependencies` so just copy this to your root directory in your multi stage build when building ffmpeg.
+You can use something like this
 
 ```
-FROM ubuntu:20.04
-FROM maxpowel/ffmpeg-dependencies as ffmpegdeps
+FROM maxpowel/ffmpeg-dependencies
 
-COPY --from=ffmpegdeps /dependencies /dependencies
+RUN wget https://ffmpeg.org/releases/ffmpeg-5.0.2.tar.gz
+RUN cd ffmpeg && \
+./configure \
+    --enable-gpl \
+    --enable-nonfree \
+    --enable-shared \
+    --enable-libass \
+    --enable-libfdk-aac \
+    --enable-libfreetype \
+    --enable-libmp3lame \
+    --enable-libtheora \
+    --enable-libvorbis \
+    --enable-libvpx \
+    --enable-libx264 \
+    --enable-libx265 \
+    --enable-xlib \
+&& make -j 8 && make install
+
 
 ```
 
